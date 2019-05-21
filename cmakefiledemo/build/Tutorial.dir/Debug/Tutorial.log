@@ -1,0 +1,33 @@
+﻿生成启动时间为 5/18/2019 9:31:33 AM。
+     1>项目“E:\my_git_repo\miscTests\cmakefiledemo\build\Tutorial.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Tutorial.dir\Debug\Tutorial.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Tutorial.dir\Debug\Tutorial.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       CustomBuild:
+         Building Custom Rule E:/my_git_repo/miscTests/cmakefiledemo/CMakeLists.txt
+         CMake does not need to re-run because E:/my_git_repo/miscTests/cmakefiledemo/build/CMakeFiles/generate.stamp is up-to-date.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IE:\my_git_repo\miscTests\cmakefiledemo\build /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Tutorial.dir\Debug\\" /Fd"Tutorial.dir\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\tutorial.cxx
+         tutorial.cxx
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Tutorial.dir\Debug\Tutorial.exe.embed.manifest.res" Tutorial.dir\Debug\Tutorial_manifest.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\my_git_repo\miscTests\cmakefiledemo\build\Debug\Tutorial.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /ManifestFile:"Tutorial.dir\Debug\Tutorial.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:/my_git_repo/miscTests/cmakefiledemo/build/Debug/Tutorial.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/my_git_repo/miscTests/cmakefiledemo/build/Debug/Tutorial.lib" /MACHINE:X86 Tutorial.dir\Debug\Tutorial.exe.embed.manifest.res
+         Tutorial.dir\Debug\tutorial.obj  /machine:X86
+       Manifest:
+         正在删除文件“Tutorial.dir\Debug\Tutorial.exe.embed.manifest”。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Tutorial.dir\Debug\Tutorial.exe.embed.manifest" /manifest Tutorial.dir\Debug\Tutorial.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Tutorial.dir\Debug\Tutorial.exe.embed.manifest.res" Tutorial.dir\Debug\Tutorial_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\my_git_repo\miscTests\cmakefiledemo\build\Debug\Tutorial.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /ManifestFile:"Tutorial.dir\Debug\Tutorial.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:/my_git_repo/miscTests/cmakefiledemo/build/Debug/Tutorial.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/my_git_repo/miscTests/cmakefiledemo/build/Debug/Tutorial.lib" /MACHINE:X86 Tutorial.dir\Debug\Tutorial.exe.embed.manifest.res
+         Tutorial.dir\Debug\tutorial.obj  /machine:X86
+         Tutorial.vcxproj -> E:\my_git_repo\miscTests\cmakefiledemo\build\Debug\Tutorial.exe
+       FinalizeBuildStatus:
+         正在删除文件“Tutorial.dir\Debug\Tutorial.unsuccessfulbuild”。
+         正在对“Tutorial.dir\Debug\Tutorial.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\my_git_repo\miscTests\cmakefiledemo\build\Tutorial.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.10
