@@ -10,19 +10,51 @@ Welcome to {{ title }}!
 <!--bar chart-->
 <h2>Bar Chart</h2>
 <div class="chart" [ngStyle]="{'width.px':width, 'height.px':height}">
-<!-- Labels -->
-<div class="y" [ngStyle]="{'width.px':height}">{{yAxis}}</div>
-<div class="x">{{xAxis}}</div>
-<!-- Data -->
-<div *ngFor="let bar of data; let i = index;" class="bar" 
-[ngStyle]="{'height.px':bar.value / max * height, 'width.px':width / data.length - 5, 'left.px': i / data.length * width}" 
-(mouseenter) ="mouseEnter('div a') " 
-(mouseleave) ="mouseLeave('div A') "
-(click) = "clicked(i)">
-</div>
+    <!-- Labels -->
+    <div class="y" [ngStyle]="{'width.px':height}">{{yAxis}}</div>
+    <div class="x">{{xAxis}}</div>
+    <!-- Data -->
+    <div *ngFor="let bar of data; let i = index;" class="bar" 
+    [ngStyle]="{'height.px':bar.value / max * height, 'width.px':width / data.length - 5, 'left.px': i / data.length * width}" 
+    (mouseenter) ="mouseEnter('div a') " 
+    (mouseleave) ="mouseLeave('div A') "
+    (click) = "clicked(i / data.length * width, bar.value / max * height)">
+    </div>
+    <div class="line" #one></div>
 
 </div>
 
+
+<h2>Dot Chart</h2>
+<div class="chart" [ngStyle]="{'width.px':width, 'height.px':height}">
+        <!-- Labels -->
+        <div class="y" [ngStyle]="{'width.px':height}">{{yAxis}}</div>
+        <div class="x">{{xAxis}}</div>
+        <!-- Data -->
+        <div *ngFor="let dot of data; let i = index;" class="dot" 
+        [ngStyle]="{'bottom.px':dot.value / max * height, 'left.px': (i + 0.5)/ data.length * width}" 
+        (mouseenter) ="mouseEnter('div a') " 
+        (mouseleave) ="mouseLeave('div A') "
+        (click) = "clicked(dot)">
+        </div>
+        
+        <!-- <div *ngIf="htmlYouWantToAdd" [innerHTML]="htmlYouWantToAdd"></div> -->
+    
+</div>
+
+
+
+  <!-- Data
+<svg [ngStyle]="{'width.px':width, 'height.px':height}">
+
+        <line ng-repeat="let line of data" 
+              x1="{{i / data.length * width }}" 
+              y1="{{data[i - 1].value / max * height}}" 
+              x2="{{(i + 1) / data.length * width}}" 
+              y2="{{line.value / max * height}}">
+        </line>
+    
+</svg> -->
 
 
 <h2>Here are some links to help you start: </h2>
