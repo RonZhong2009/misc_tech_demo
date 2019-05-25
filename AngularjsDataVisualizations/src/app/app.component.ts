@@ -4,6 +4,10 @@ selector: 'app-root',
 templateUrl: './app.component.html',
 styleUrls: ['./app.component.css']
 })
+
+
+
+
 export class AppComponent {
   title = 'angularvisual';
   width: number;
@@ -15,8 +19,10 @@ export class AppComponent {
   htmlYouWantToAdd:string;
   linePos: number[] = [-1, -1, -1, -1];
   lineStatus: string = "none";
+  lines: Line[] = [];
 
-  @ViewChild('one') d1:ElementRef;
+  @ViewChild('barLineMarker') barL:ElementRef;
+  @ViewChild('dotLineMarker') dotL:ElementRef;
 
   constructor(){
     // Options
@@ -86,6 +92,31 @@ export class AppComponent {
     // End Controller 
   }
 
+  onRightClick(){
+    // this.lines.length = 0;
+    //reset it
+    this.lines = [];
+    this.lines.push(new Line(0, 0, 0, 0)) ;
+    this.data.forEach((element, i) => {
+      let dotY = element.value / this.max * this.height;
+      let dotX = (i + 0.5)/ this.data.length * this.width;
+      this.lines[i].endX = dotX;
+      this.lines[i].endY = dotY;
+      this.lines.push(new Line(dotX, dotY, 0, 0));
+    });
+
+    this.lines.forEach((element, i )=>{
+      console.log("the "+i+" pos:"+ element.toString());
+      this.dotL.nativeElement.appendChild(
+      this.createLine(element.startX,element.startY, element.endX, element.endY));
+    });
+  }
+
+  DotChartclick(){
+    // var myEl = document.element( document.querySelector( '#dotLineMarker' ) );
+    this.dotL.nativeElement.empty();
+  }
+
   clicked(x, y) { 
     console.log('clicked：x '+ x + "   y:" + y);
     // this.htmlYouWantToAdd = "<b>Some HTML you want to display</b>";
@@ -98,7 +129,7 @@ export class AppComponent {
       this.linePos[2] = x;
       this.linePos[3] = y;
       this.lineStatus = "ready";
-      this.d1.nativeElement.appendChild(
+      this.barL.nativeElement.appendChild(
         this.createLine(
           this.linePos[0], 
           this.linePos[1],
@@ -108,15 +139,15 @@ export class AppComponent {
     }else{
       console.error("some exception case here with status:"+this.lineStatus);
     }
-  } 
+  }; 
 
   mouseEnter(event){
     console.log('mouseEnter'+ event);
-  }
+  };
 
   mouseLeave(event){
     console.log('mouseLeave'+ event);
-  }
+  };
 
   createLineElement(x, y, length, angle) {
    
@@ -136,22 +167,46 @@ export class AppComponent {
     console.log("styles:"+styles);
     line.setAttribute('style', styles);  
     return line;
+  }
+
+  createLine(x1, y1, x2, y2) {
+      let a = x1 - x2,
+          b = y1 - y2,
+          c = Math.sqrt(a * a + b * b);
+
+      let sx = (x1 + x2) / 2,
+          sy = (y1 + y2) / 2;
+
+      let x = sx - c / 2,
+          y = sy;
+
+      let alpha = Math.PI - Math.atan2(-b, a);
+
+      return this.createLineElement(x, y, c, -alpha);
+  }
 }
 
-createLine(x1, y1, x2, y2) {
-    var a = x1 - x2,
-        b = y1 - y2,
-        c = Math.sqrt(a * a + b * b);
 
-    var sx = (x1 + x2) / 2,
-        sy = (y1 + y2) / 2;
 
-    var x = sx - c / 2,
-        y = sy;
-
-    var alpha = Math.PI - Math.atan2(-b, a);
-
-    return this.createLineElement(x, y, c, -alpha);
-}
-
-}
+class Line{
+  startX:number;
+  startY:number;
+  endX:number;
+  endY:number;
+ 
+  constructor(sx, sy,ex, ey){
+    this.startX = sx;
+    this.startY = sy;
+    this.endX = ex;
+    this.endY = ey;
+  }
+  
+ 
+  toString(){
+   let str =  "startX:"+this.startX 
+           + " startY:"+this.startY 
+           + " endX:"+this.endX 
+           + " endY:"+this.endY ;
+  return str;
+  }
+ };

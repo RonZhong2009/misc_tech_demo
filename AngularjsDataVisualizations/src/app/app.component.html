@@ -20,13 +20,15 @@ Welcome to {{ title }}!
     (mouseleave) ="mouseLeave('div A') "
     (click) = "clicked(i / data.length * width, bar.value / max * height)">
     </div>
-    <div class="line" #one></div>
+    <div class="line" #barLineMarker></div>
+
+    
 
 </div>
 
-
+<!-- onRightClick($event), $event is an optional parameter so your template and event handler can look like this: -->
 <h2>Dot Chart</h2>
-<div class="chart" [ngStyle]="{'width.px':width, 'height.px':height}">
+<div class="chart" [ngStyle]="{'width.px':width, 'height.px':height}"  (contextmenu)="onRightClick()" >
         <!-- Labels -->
         <div class="y" [ngStyle]="{'width.px':height}">{{yAxis}}</div>
         <div class="x">{{xAxis}}</div>
@@ -35,9 +37,9 @@ Welcome to {{ title }}!
         [ngStyle]="{'bottom.px':dot.value / max * height, 'left.px': (i + 0.5)/ data.length * width}" 
         (mouseenter) ="mouseEnter('div a') " 
         (mouseleave) ="mouseLeave('div A') "
-        (click) = "clicked(dot)">
+        (click) = "DotChartclick()">
         </div>
-        
+        <div class="line" #dotLineMarker></div>
         <!-- <div *ngIf="htmlYouWantToAdd" [innerHTML]="htmlYouWantToAdd"></div> -->
     
 </div>
