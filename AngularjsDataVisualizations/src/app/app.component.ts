@@ -114,7 +114,20 @@ export class AppComponent {
 
   DotChartclick(){
     // var myEl = document.element( document.querySelector( '#dotLineMarker' ) );
-    this.dotL.nativeElement.empty();
+    // this.dotL.nativeElement.empty();
+    alert("try to destory");
+    if(this.dotL.nativeElement.parentNode != null){
+      alert("destorying");
+    //  this.dotL.nativeElement.parentNode.removeChild(this.dotL.nativeElement);
+    // this.dotL.nativeElement.nodeValue = "";  doesn't work
+    //specify all the lines added with class "dash", then we can remove them, here.
+    // or we can remove childnodes directly
+    this.dotL.nativeElement.childNodes.forEach(childNode => {
+      this.dotL.nativeElement.removeChild(childNode);
+    });
+   
+    // this.dotL.nativeElement.getElementsByTagName
+    }
   }
 
   clicked(x, y) { 
@@ -165,6 +178,7 @@ export class AppComponent {
 
     // + 'transform-origin: bottom left;' 
     console.log("styles:"+styles);
+    line.setAttribute('class', "dash");  
     line.setAttribute('style', styles);  
     return line;
   }
