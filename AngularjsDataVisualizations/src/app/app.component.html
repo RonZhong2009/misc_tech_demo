@@ -44,6 +44,22 @@ Welcome to {{ title }}!
 
 
 
+<div class="textArea"  [ngStyle]="{'width.px':width, 'height.px':height}" >
+        <textarea  [ngStyle]="{'width.px':width, 'height.px':height}" 
+                        class="textArea"
+                        ng-model="inputString" 
+                        placeholder="(Valgrind Massif content)">
+        </textarea>
+</div>
+        
+
+
+<!-- <div class="textArea"  [ngStyle]="{'width.px':width, 'height.px':height}" >
+        <input   type="text" [ngStyle]="{'width.px':width, 'height.px':height}" 
+                [(ngModel)]="inputString" 
+                placeholder="(Valgrind Massif content)"/>
+</div> -->
+
   <!-- Data
 <svg [ngStyle]="{'width.px':width, 'height.px':height}">
 

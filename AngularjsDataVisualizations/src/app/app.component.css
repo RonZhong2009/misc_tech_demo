@@ -1,12 +1,22 @@
 body {
     text-align: center;
     }
+    
 .chart {
 border-left: 1px solid black;
 border-bottom: 1px solid black;
 margin: 60px auto;
 position: relative;
 }
+
+.textArea{
+border-left: 1px solid black;
+border-bottom: 1px solid black;
+margin: 0 auto;
+position: relative;
+}
+
+
 .y {
 position: absolute;
 transform: rotate(-90deg);

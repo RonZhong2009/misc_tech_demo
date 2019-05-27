@@ -1,4 +1,12 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+@NgModule({
+  imports: [FormsModule, ReactiveFormsModule],
+  declarations: [AppComponent]
+  })
+
 @Component({
 selector: 'app-root',
 templateUrl: './app.component.html',
@@ -20,6 +28,7 @@ export class AppComponent {
   linePos: number[] = [-1, -1, -1, -1];
   lineStatus: string = "none";
   lines: Line[] = [];
+  inputString: string;
 
   @ViewChild('barLineMarker') barL:ElementRef;
   @ViewChild('dotLineMarker') dotL:ElementRef;
@@ -119,8 +128,8 @@ export class AppComponent {
     if(this.dotL.nativeElement.parentNode != null){
       alert("destorying");
     //  this.dotL.nativeElement.parentNode.removeChild(this.dotL.nativeElement);
-    // this.dotL.nativeElement.nodeValue = "";  doesn't work
-    //specify all the lines added with class "dash", then we can remove them, here.
+    //  failed way: this.dotL.nativeElement.nodeValue = "";  doesn't work
+    //  specify all the lines added with class "dash", then we can remove them, here.
     // or we can remove childnodes directly
     this.dotL.nativeElement.childNodes.forEach(childNode => {
       this.dotL.nativeElement.removeChild(childNode);
