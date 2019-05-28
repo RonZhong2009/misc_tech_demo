@@ -2,10 +2,7 @@ import { Component, ViewChild, ElementRef, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-@NgModule({
-  imports: [FormsModule, ReactiveFormsModule],
-  declarations: [AppComponent]
-  })
+
 
 @Component({
 selector: 'app-root',
@@ -99,6 +96,26 @@ export class AppComponent {
       this.max = this.data[i].value;
     }
     // End Controller 
+  }
+
+  handleMassifData(){
+    // console.log("inputString:" + this.inputString);
+    // alert(this.inputString);
+
+
+
+
+    let cmdRegPatt = new RegExp( ".*cmd: (.*)\n");
+    let cmdRet = (/.*cmd:\s(.*)\n/g).exec(this.inputString);
+    let timeunitRet = (/.*time_unit:\s(.*)\n/g).exec(this.inputString);
+    let snaptshotRet = (/#-{11}\nsnapshot=(\d+)\n#-{11}\ntime=(\d+)\nmem_heap_B=(\d+)\nmem_heap_extra_B=(\d+)\nmem_stacks_B=(\d+)\nheap_tree=([a-zA-Z]+)\n/g).exec(this.inputString);
+    // alert(cmdRet[1]);
+    // alert(timeunitRet[1]);
+    alert(snaptshotRet[1]);
+    console.log("the left string:" + this.inputString);
+
+    let nodeRegPatt = "";
+
   }
 
   onRightClick(){

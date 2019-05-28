@@ -54,11 +54,15 @@ Welcome to {{ title }}!
         
 
 
-<!-- <div class="textArea"  [ngStyle]="{'width.px':width, 'height.px':height}" >
-        <input   type="text" [ngStyle]="{'width.px':width, 'height.px':height}" 
+<div class="textArea"  [ngStyle]="{'width.px':width, 'height.px':height}" >
+        <textarea class="textArea"  type="text" [ngStyle]="{'width.px':width, 'height.px':height}" 
                 [(ngModel)]="inputString" 
-                placeholder="(Valgrind Massif content)"/>
-</div> -->
+                placeholder="(Valgrind Massif content)">
+        </textarea>
+</div>
+
+
+        <button (click)="handleMassifData()"></button>
 
   <!-- Data
 <svg [ngStyle]="{'width.px':width, 'height.px':height}">
