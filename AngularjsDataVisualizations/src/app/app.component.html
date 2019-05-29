@@ -43,6 +43,27 @@ Welcome to {{ title }}!
 </div>
 
 
+<!-- onRightClick($event), $event is an optional parameter so your template and event handler can look like this: -->
+<h2>Dot mem_heap_B Chart</h2>
+<div class="chart" [ngStyle]="{'width.px':width, 'height.px':height}"  (contextmenu)="onRightClickMem_heap_B()" (click) = "DotChartclick()" >
+        <!-- Labels -->
+        <div class="y" [ngStyle]="{'width.px':height}">{{yAxis}}</div>
+        <div class="x">{{xAxis}}</div>
+        <!-- Data -->
+        <div *ngFor="let dot of snapshots; let i = index;" class="dot" 
+        [ngStyle]="{'bottom.px':dot.mem_heap_B / max_mem_heap_B * height, 'left.px': (i + 0.5)/ snapshots.length * width}" 
+        (mouseenter) ="mouseEnterMem_heap_B(snapshots[i]) " 
+        (mouseleave) ="mouseLeaveMem_heap_B(snapshots[i]) "
+        index = 'i'
+        >
+        </div>
+        <div class="line" #mem_heap_BMarker></div>
+        <!-- <div *ngIf="htmlYouWantToAdd" [innerHTML]="htmlYouWantToAdd"></div> -->
+    
+</div>
+
+
+
 
 <div class="textArea"  [ngStyle]="{'width.px':width, 'height.px':height}" >
         <textarea  [ngStyle]="{'width.px':width, 'height.px':height}" 

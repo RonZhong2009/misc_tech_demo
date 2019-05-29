@@ -45,6 +45,11 @@ height: 10px;
 border-radius: 50%;
 position: absolute;
 }
+
+.dot:nth-of-type(even) {
+    background: red;
+}
+
 svg {
 position: absolute;
 transform: rotateX(180deg);

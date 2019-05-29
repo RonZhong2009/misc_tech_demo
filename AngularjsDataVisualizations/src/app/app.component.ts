@@ -12,7 +12,6 @@ styleUrls: ['./app.component.css']
 
 
 
-
 export class AppComponent {
   title = 'angularvisual';
   width: number;
@@ -26,9 +25,12 @@ export class AppComponent {
   lineStatus: string = "none";
   lines: Line[] = [];
   inputString: string;
+  snapshots: Snapshot[] = [];
+  max_mem_heap_B: number;
 
   @ViewChild('barLineMarker') barL:ElementRef;
   @ViewChild('dotLineMarker') dotL:ElementRef;
+  @ViewChild('mem_heap_BMarker') mem_heap_BL:ElementRef;
 
   constructor(){
     // Options
@@ -108,15 +110,50 @@ export class AppComponent {
     let cmdRegPatt = new RegExp( ".*cmd: (.*)\n");
     let cmdRet = (/.*cmd:\s(.*)\n/g).exec(this.inputString);
     let timeunitRet = (/.*time_unit:\s(.*)\n/g).exec(this.inputString);
-    let snaptshotRet = (/#-{11}\nsnapshot=(\d+)\n#-{11}\ntime=(\d+)\nmem_heap_B=(\d+)\nmem_heap_extra_B=(\d+)\nmem_stacks_B=(\d+)\nheap_tree=([a-zA-Z]+)\n/g).exec(this.inputString);
-    // alert(cmdRet[1]);
-    // alert(timeunitRet[1]);
-    alert(snaptshotRet[1]);
-    console.log("the left string:" + this.inputString);
+    let snpashotRegEx = /#-{11}\nsnapshot=(\d+)\n#-{11}\ntime=(\d+)\nmem_heap_B=(\d+)\nmem_heap_extra_B=(\d+)\nmem_stacks_B=(\d+)\nheap_tree=([a-zA-Z]+)\n/g;
+    // let snaptshotRet = .exec(this.inputString);
+    console.log(cmdRet[1]);
+    console.log(timeunitRet[1]);
+    // console.log(snaptshotRet[1]);
+    let snapshotMatch;
+    while((snapshotMatch = snpashotRegEx.exec(this.inputString)) !== null) {
+      let node = new Snapshot();
+      node.index = parseInt(snapshotMatch[1]);
+      node.time = parseInt(snapshotMatch[2]);
+      node.mem_heap_B= parseInt(snapshotMatch[3]);
+      node.mem_heap_extra_B= parseInt(snapshotMatch[4]);
+      node.mem_stacks_B= parseInt(snapshotMatch[5]);
+      node.heap_tree = snapshotMatch[6];
+      this.snapshots.push(node);
+      // console.log(node);
+}
+    // alert(snaptshotRet[1]);
+    // console.log("the left string:" + this.inputString);
+
+    this.max_mem_heap_B = 0;
+    let arrLength = this.snapshots.length;
+    for (var i = 0; i < arrLength; i++) {
+      // Find Maximum X Axis Value
+      if (this.snapshots[i].mem_heap_B > this.max_mem_heap_B)
+      this.max_mem_heap_B = this.snapshots[i].mem_heap_B;
+    }
 
     let nodeRegPatt = "";
 
   }
+
+
+  mouseEnterMem_heap_B(event){
+    // let target = event.target;
+    console.log('mouseEnter target '+     event.mem_heap_B);
+    // console.log('mouseEnter'+     target.style);
+  };
+
+  mouseLeaveMem_heap_B(event){
+    // let target = event.target;
+    console.log('mouseLeave'+     event.mem_heap_B);
+  };
+  
 
   onRightClick(){
     // this.lines.length = 0;
@@ -134,6 +171,27 @@ export class AppComponent {
     this.lines.forEach((element, i )=>{
       console.log("the "+i+" pos:"+ element.toString());
       this.dotL.nativeElement.appendChild(
+      this.createLine(element.startX,element.startY, element.endX, element.endY));
+    });
+  }
+
+
+  onRightClickMem_heap_B(){
+    // this.lines.length = 0;
+    //reset it
+    this.lines = [];
+    this.lines.push(new Line(0, 0, 0, 0)) ;
+    this.data.forEach((element, i) => {
+      let dotY = element.mem_heap_B / this.max_mem_heap_B * this.height;
+      let dotX = (i + 0.5)/ this.data.length * this.width;
+      this.lines[i].endX = dotX;
+      this.lines[i].endY = dotY;
+      this.lines.push(new Line(dotX, dotY, 0, 0));
+    });
+
+    this.lines.forEach((element, i )=>{
+      console.log("the "+i+" pos:"+ element.toString());
+      this.mem_heap_BL.nativeElement.appendChild(
       this.createLine(element.startX,element.startY, element.endX, element.endY));
     });
   }
@@ -224,7 +282,16 @@ export class AppComponent {
 
       return this.createLineElement(x, y, c, -alpha);
   }
-}
+};
+
+class Snapshot{
+  index: number;
+  time: number;
+  mem_heap_B: number;
+  mem_heap_extra_B: number;
+  mem_stacks_B: number;
+  heap_tree: string;
+};
 
 
 
