@@ -65,7 +65,7 @@ Welcome to {{ title }}!
 
 
 
- <div id="target" [ngStyle]="{'width.px':width, 'height.px':height, 'border':'1px solid blue', 'border': '1px solid blue'}"  ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
+ <div id="dropbox" [ngStyle]="{'width.px':width, 'height.px':height, 'border':'1px solid blue', 'border': '1px solid blue'}"  ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
 
 
 
@@ -81,7 +81,7 @@ Welcome to {{ title }}!
 </div>
 
 
-<form class="box" method="post" action="" enctype="multipart/form-data">
+<!-- <form class="box" method="post" action="" enctype="multipart/form-data">
         <div class="box__input">
           <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
           <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
@@ -90,9 +90,9 @@ Welcome to {{ title }}!
         <div class="box__uploading">Uploading&hellip;</div>
         <div class="box__success">Done!</div>
         <div class="box__error">Error! <span></span>.</div>
-</form>
+</form> -->
 
-
+<input type="file" id="input">
 
         <button class="box__input"  (click)="handleMassifData()"></button>
 
