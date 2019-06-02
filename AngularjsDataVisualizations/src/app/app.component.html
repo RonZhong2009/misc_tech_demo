@@ -94,7 +94,21 @@ Welcome to {{ title }}!
 
 <input type="file" id="input">
 
-        <button class="box__input"  (click)="handleMassifData()"></button>
+<input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
+<label for="fileElem">Select some files</label>
+
+
+<!-- Using object URLs to display images -->
+<input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+<a href="#" id="fileSelect">Select some files</a> 
+<div id="fileList">
+  <p>No files selected!</p>
+</div>
+
+
+
+
+<button class="box__input"  (click)="handleMassifData()"></button>
 
   <!-- Data
 <svg [ngStyle]="{'width.px':width, 'height.px':height}">

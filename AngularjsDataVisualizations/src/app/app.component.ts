@@ -27,12 +27,17 @@ export class AppComponent {
   inputString: string;
   snapshots: Snapshot[] = [];
   max_mem_heap_B: number;
+  fileList: Element;
+  fileElem: Element;
+  fileSelect: Element;
+  
 
   @ViewChild('barLineMarker') barL:ElementRef;
   @ViewChild('dotLineMarker') dotL:ElementRef;
   @ViewChild('mem_heap_BMarker') mem_heap_BL:ElementRef;
 
   constructor(){
+    this.initObjUrls();
     // Options
     this.width = 600;
     this.height = 350;
@@ -139,14 +144,56 @@ export class AppComponent {
       
       if (!file.type.startsWith('image/')){ continue }
       
-      const img = document.createElement("img");
+      let img = document.createElement("img");
+      
       img.classList.add("obj");
-      img.file = file;
+      img.setAttribute("file", file);
       // preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
       this.dotL.nativeElement.appendChild(img);
       const reader = new FileReader();
       reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
       reader.readAsDataURL(file);
+    }
+  }
+
+   initObjUrls(){
+    // window.URL = window.URL;
+
+        this.fileSelect = document.getElementById("fileSelect");
+        this.fileElem = document.getElementById("fileElem");
+        this.fileList = document.getElementById("fileList");
+    
+        this.fileSelect.addEventListener("click", function (e) {
+      if (this.fileElem) {
+        this.fileElem.click();
+      }
+      e.preventDefault(); // prevent navigation to "#"
+    }, false);
+   }
+
+
+  handleFilesWithObjUrls(files){
+    if (!files.length) {
+      this.fileList.innerHTML = "<p>No files selected!</p>";
+    } else {
+      this.fileList.innerHTML = "";
+      const list = document.createElement("ul");
+      this.fileList.appendChild(list);
+      for (let i = 0; i < files.length; i++) {
+        const li = document.createElement("li");
+        list.appendChild(li);
+        
+        const img = document.createElement("img");
+        img.src = window.URL.createObjectURL(files[i]);
+        img.height = 60;
+        img.onload = function() {
+          window.URL.revokeObjectURL(img.src);
+        }
+        li.appendChild(img);
+        const info = document.createElement("span");
+        info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
+        li.appendChild(info);
+      }
     }
   }
 
