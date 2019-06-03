@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, NgModule } from '@angular/core';
+import { Component, ViewChild, ElementRef, NgModule, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -12,7 +12,7 @@ styleUrls: ['./app.component.css']
 
 
 
-export class AppComponent {
+export class AppComponent   implements OnInit {
   title = 'angularvisual';
   width: number;
   height: number;
@@ -36,8 +36,23 @@ export class AppComponent {
   @ViewChild('dotLineMarker') dotL:ElementRef;
   @ViewChild('mem_heap_BMarker') mem_heap_BL:ElementRef;
 
-  constructor(){
+
+ //code that will execute at the start of the loading process
+ // just like body.onload()
+  ngOnInit(){
+   
     this.initObjUrls();
+    
+    let dropbox;
+    dropbox = document.getElementById("dropbox");
+    dropbox.addEventListener("dragenter", this.dragenter, false);
+    dropbox.addEventListener("dragover", this.dragover, false);
+    dropbox.addEventListener("drop", this.drop, false);
+
+   }
+
+  constructor(){
+   
     // Options
     this.width = 600;
     this.height = 350;
@@ -104,14 +119,6 @@ export class AppComponent {
     }
     // End Controller 
 
-
-
-    let dropbox;
-
-    dropbox = document.getElementById("dropbox");
-    dropbox.addEventListener("dragenter", this.dragenter, false);
-    dropbox.addEventListener("dragover", this.dragover, false);
-    dropbox.addEventListener("drop", this.drop, false);
   }
 
 
@@ -163,9 +170,10 @@ export class AppComponent {
         this.fileElem = document.getElementById("fileElem");
         this.fileList = document.getElementById("fileList");
     
-        this.fileSelect.addEventListener("click", function (e) {
+        this.fileSelect.addEventListener("click",  (e)=> {
       if (this.fileElem) {
-        this.fileElem.click();
+        let element: HTMLElement = this.fileElem as HTMLElement;
+        element.click();
       }
       e.preventDefault(); // prevent navigation to "#"
     }, false);

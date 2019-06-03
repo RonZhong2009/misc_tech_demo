@@ -78,6 +78,7 @@ Welcome to {{ title }}!
                 [(ngModel)]="inputString" 
                 placeholder="(Valgrind Massif content)">
         </textarea>
+        <button class="box__input"  (click)="handleMassifData()"></button>
 </div>
 
 
@@ -92,23 +93,30 @@ Welcome to {{ title }}!
         <div class="box__error">Error! <span></span>.</div>
 </form> -->
 
+<br/>
+<br/>
+<br/>
+
 <input type="file" id="input">
+<br/>
+<br/>
+<br/>
+<!-- <input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
+<label for="fileElem">Select some files</label> -->
 
-<input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
-<label for="fileElem">Select some files</label>
-
+<br/>
+<br/>
+<br/>
 
 <!-- Using object URLs to display images -->
 <input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
-<a href="#" id="fileSelect">Select some files</a> 
+<a href="#" id="fileSelect">Select some files by only link</a> 
 <div id="fileList">
   <p>No files selected!</p>
 </div>
 
 
 
-
-<button class="box__input"  (click)="handleMassifData()"></button>
 
   <!-- Data
 <svg [ngStyle]="{'width.px':width, 'height.px':height}">
