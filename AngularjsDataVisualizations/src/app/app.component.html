@@ -96,20 +96,24 @@ Welcome to {{ title }}!
 <br/>
 <br/>
 <br/>
-
+<p>Using input tag to select file </p>
+<p>---------------------------------------------------------------</p>
 <input type="file" id="input">
 <br/>
 <br/>
 <br/>
 <!-- <input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
 <label for="fileElem">Select some files</label> -->
+<!-- <p1>Using object URLs to display images </p1> -->
 
+<p>This is paragraph text that has been separated from the heading by a line.</p>
+<p>-----------------------------------------------------------------</p>
 <br/>
 <br/>
 <br/>
 
 <!-- Using object URLs to display images -->
-<input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+<input type="file" id="fileElem" multiple accept="image/*" style="display:none" [ngModel]="range" (ngModelChange)="handleFilesWithObjUrls($event)">
 <a href="#" id="fileSelect">Select some files by only link</a> 
 <div id="fileList">
   <p>No files selected!</p>

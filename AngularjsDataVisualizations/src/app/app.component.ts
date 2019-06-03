@@ -137,8 +137,8 @@ export class AppComponent   implements OnInit {
     e.stopPropagation();
     e.preventDefault();
   
-    const dt = e.dataTransfer;
-    const files = dt.files;
+    let dt = e.dataTransfer;
+    let files = dt.files;
   
     this.handleFiles(files);
   }
@@ -147,7 +147,7 @@ export class AppComponent   implements OnInit {
 
   handleFiles(files) {
     for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+      let file = files[i];
       
       if (!file.type.startsWith('image/')){ continue }
       
@@ -157,7 +157,7 @@ export class AppComponent   implements OnInit {
       img.setAttribute("file", file);
       // preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
       this.dotL.nativeElement.appendChild(img);
-      const reader = new FileReader();
+      let reader = new FileReader();
       reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
       reader.readAsDataURL(file);
     }
@@ -185,27 +185,25 @@ export class AppComponent   implements OnInit {
       this.fileList.innerHTML = "<p>No files selected!</p>";
     } else {
       this.fileList.innerHTML = "";
-      const list = document.createElement("ul");
+      let list = document.createElement("ul");
       this.fileList.appendChild(list);
       for (let i = 0; i < files.length; i++) {
-        const li = document.createElement("li");
+        let li = document.createElement("li");
         list.appendChild(li);
         
-        const img = document.createElement("img");
-        img.src = window.URL.createObjectURL(files[i]);
+        let img = document.createElement("img");
+        img.src = URL.createObjectURL(files);// no need to use window.URL.createObjectURL, reference to https://stackoverflow.com/questions/41649970/using-the-global-url-variable-as-type
         img.height = 60;
         img.onload = function() {
-          window.URL.revokeObjectURL(img.src);
+          URL.revokeObjectURL(img.src);
         }
         li.appendChild(img);
-        const info = document.createElement("span");
+        let info = document.createElement("span");
         info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
         li.appendChild(info);
       }
     }
   }
-
-
 
   handleMassifData(){
     // console.log("inputString:" + this.inputString);
