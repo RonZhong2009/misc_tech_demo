@@ -180,28 +180,30 @@ export class AppComponent   implements OnInit {
    }
 
 
-  handleFilesWithObjUrls(files){
-    if (!files.length) {
+  handleFilesWithObjUrls(file){
+    if (!file.length) {
       this.fileList.innerHTML = "<p>No files selected!</p>";
     } else {
       this.fileList.innerHTML = "";
       let list = document.createElement("ul");
       this.fileList.appendChild(list);
-      for (let i = 0; i < files.length; i++) {
+      // for (let i = 0; i < files.length; i++) {
         let li = document.createElement("li");
         list.appendChild(li);
         
         let img = document.createElement("img");
-        img.src = URL.createObjectURL(files);// no need to use window.URL.createObjectURL, reference to https://stackoverflow.com/questions/41649970/using-the-global-url-variable-as-type
+         let fileurl = URL.createObjectURL(file);// no need to use window.URL.createObjectURL, reference to https://stackoverflow.com/questions/41649970/using-the-global-url-variable-as-type
+        console.log("select file: "+ file);
+        img.src = fileurl;
         img.height = 60;
         img.onload = function() {
           URL.revokeObjectURL(img.src);
         }
         li.appendChild(img);
         let info = document.createElement("span");
-        info.innerHTML = files[i].name + ": " + files[i].size + " bytes";
+        info.innerHTML = file.name + ": " + file.size + " bytes";
         li.appendChild(info);
-      }
+      // }
     }
   }
 
