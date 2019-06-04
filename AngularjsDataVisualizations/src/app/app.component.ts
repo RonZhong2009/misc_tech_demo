@@ -192,6 +192,7 @@ export class AppComponent   implements OnInit {
         list.appendChild(li);
         
         let img = document.createElement("img");
+        //TODO: seems the file should only the filename? not the full path
          let fileurl = URL.createObjectURL(file);// no need to use window.URL.createObjectURL, reference to https://stackoverflow.com/questions/41649970/using-the-global-url-variable-as-type
         console.log("select file: "+ file);
         img.src = fileurl;
