@@ -41,12 +41,13 @@ export class AppComponent   implements OnInit {
  // just like body.onload()
   ngOnInit(){
    
-    this.initObjUrls();
+    // this.initObjUrls();
     
     let dropbox;
     dropbox = document.getElementById("dropbox");
     dropbox.addEventListener("dragenter", this.dragenter, false);
     dropbox.addEventListener("dragover", this.dragover, false);
+    //FIXME: this drop event doesn't work, need to figure out the order of event handling
     dropbox.addEventListener("drop", this.drop, false);
 
    }
@@ -131,6 +132,7 @@ export class AppComponent   implements OnInit {
    dragover(e) {
     e.stopPropagation();
     e.preventDefault();
+    
   }
 
    drop(e) {
@@ -163,50 +165,50 @@ export class AppComponent   implements OnInit {
     }
   }
 
-   initObjUrls(){
-    // window.URL = window.URL;
+  //  initObjUrls(){
+  //   // window.URL = window.URL;
 
-        this.fileSelect = document.getElementById("fileSelect");
-        this.fileElem = document.getElementById("fileElem");
-        this.fileList = document.getElementById("fileList");
+  //       this.fileSelect = document.getElementById("fileSelect");
+  //       this.fileElem = document.getElementById("fileElem");
+  //       this.fileList = document.getElementById("fileList");
     
-        this.fileSelect.addEventListener("click",  (e)=> {
-      if (this.fileElem) {
-        let element: HTMLElement = this.fileElem as HTMLElement;
-        element.click();
-      }
-      e.preventDefault(); // prevent navigation to "#"
-    }, false);
-   }
+  //       this.fileSelect.addEventListener("click",  (e)=> {
+  //     if (this.fileElem) {
+  //       let element: HTMLElement = this.fileElem as HTMLElement;
+  //       element.click();
+  //     }
+  //     e.preventDefault(); // prevent navigation to "#"
+  //   }, false);
+  //  }
 
 
-  handleFilesWithObjUrls(file){
-    if (!file.length) {
-      this.fileList.innerHTML = "<p>No files selected!</p>";
-    } else {
-      this.fileList.innerHTML = "";
-      let list = document.createElement("ul");
-      this.fileList.appendChild(list);
-      // for (let i = 0; i < files.length; i++) {
-        let li = document.createElement("li");
-        list.appendChild(li);
+  // handleFilesWithObjUrls(file){
+  //   if (!file.length) {
+  //     this.fileList.innerHTML = "<p>No files selected!</p>";
+  //   } else {
+  //     this.fileList.innerHTML = "";
+  //     let list = document.createElement("ul");
+  //     this.fileList.appendChild(list);
+  //     // for (let i = 0; i < files.length; i++) {
+  //       let li = document.createElement("li");
+  //       list.appendChild(li);
         
-        let img = document.createElement("img");
-        //TODO: seems the file should only the filename? not the full path
-         let fileurl = URL.createObjectURL(file);// no need to use window.URL.createObjectURL, reference to https://stackoverflow.com/questions/41649970/using-the-global-url-variable-as-type
-        console.log("select file: "+ file);
-        img.src = fileurl;
-        img.height = 60;
-        img.onload = function() {
-          URL.revokeObjectURL(img.src);
-        }
-        li.appendChild(img);
-        let info = document.createElement("span");
-        info.innerHTML = file.name + ": " + file.size + " bytes";
-        li.appendChild(info);
-      // }
-    }
-  }
+  //       let img = document.createElement("img");
+  //       //TODO: seems the file should only the filename? not the full path
+  //        let fileurl = URL.createObjectURL(file);// no need to use window.URL.createObjectURL, reference to https://stackoverflow.com/questions/41649970/using-the-global-url-variable-as-type
+  //       console.log("select file: "+ file);
+  //       img.src = fileurl;
+  //       img.height = 60;
+  //       img.onload = function() {
+  //         URL.revokeObjectURL(img.src);
+  //       }
+  //       li.appendChild(img);
+  //       let info = document.createElement("span");
+  //       info.innerHTML = file.name + ": " + file.size + " bytes";
+  //       li.appendChild(info);
+  //     // }
+  //   }
+  // }
 
   handleMassifData(){
     // console.log("inputString:" + this.inputString);

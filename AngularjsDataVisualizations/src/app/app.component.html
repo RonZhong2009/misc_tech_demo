@@ -65,7 +65,7 @@ Welcome to {{ title }}!
 
 
 
- <div id="dropbox" [ngStyle]="{'width.px':width, 'height.px':height, 'border':'1px solid blue', 'border': '1px solid blue'}"  ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
+ <div id="dropbox" [ngStyle]="{'width.px':width, 'height.px':height, 'border':'1px solid blue', 'border': '1px solid blue'}" >Drop Zone</div>
 
 
 
@@ -102,9 +102,8 @@ Welcome to {{ title }}!
 <br/>
 <br/>
 <br/>
-<!-- <input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
-<label for="fileElem">Select some files</label> -->
-<!-- <p1>Using object URLs to display images </p1> -->
+<input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
+<label for="fileElem">Select some files</label>
 
 <p>This is paragraph text that has been separated from the heading by a line.</p>
 <p>-----------------------------------------------------------------</p>
@@ -113,13 +112,16 @@ Welcome to {{ title }}!
 <br/>
 
 <!-- Using object URLs to display images -->
-<input type="file" id="fileElem" multiple accept="image/*" style="display:none" [ngModel]="range" (ngModelChange)="handleFilesWithObjUrls($event)">
+<!-- <input type="file" id="fileElem" multiple accept="image/*" style="display:none" [ngModel]="range" (ngModelChange)="handleFilesWithObjUrls($event)">
 <a href="#" id="fileSelect">Select some files by only link</a> 
 <div id="fileList">
   <p>No files selected!</p>
-</div>
+</div> -->
 
-
+<p>-----------------------------------------------------------------</p>
+<br/>
+<br/>
+<br/>
 
 
   <!-- Data
