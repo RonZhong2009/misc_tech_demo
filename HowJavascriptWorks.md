@@ -14,9 +14,10 @@ In runtime, there will be two group APIs called in javascript engine.
 * The Javascript engine built-in API
 * The named "WEB API" provided by Browser
 
-    ** DOM (document)
-    ** ajax(XMLHttpRequest)
-    ** Timeout(settimeout)
+
+      ** DOM (document)
+      ** ajax(XMLHttpRequest)
+      ** Timeout(settimeout)
 Besides that, in runtime,
 Browser? also gives two other critical components.
 
