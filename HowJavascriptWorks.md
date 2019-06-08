@@ -27,8 +27,12 @@ Browser? also gives two other critical components.
 not too much to say, just like the same as c/cpp.
 ## concurrent and event loop
 It will be easy to understand with Promises API.
-Seems JS engine only take the control of the execution of the code blocks(see them as "funtions"), it will build up the host environment for the code blocks, and execute the code blocks in the callstack frames.BUT the event loop and callback queue, outside the JS engine control will determine which callback funtion and when will be placed into the callstack frame.
+Seems JS engine only take the control of the execution of the code blocks
+(see them as "funtions"), it will build up the host environment for the 
+code blocks, and execute the code blocks in the callstack frames.BUT the event 
+loop and callback queue, outside the JS engine control will determine which 
+callback funtion and when will be placed into the callstack frame.
 
-    
+    callback hell=>Promises =>async/await 
 
 
