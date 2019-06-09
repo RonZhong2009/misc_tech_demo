@@ -36,3 +36,5 @@ callback funtion and when will be placed into the callstack frame.
     callback hell=>Promises =>async/await 
 
 
+websocket bases on long time tcp connection ?
+# Why We need websocket ?Pros and cons 
