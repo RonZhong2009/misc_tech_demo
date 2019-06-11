@@ -34,6 +34,7 @@ export class AppComponent   implements OnInit {
 
   @ViewChild('barLineMarker') barL:ElementRef;
   @ViewChild('dotLineMarker') dotL:ElementRef;
+  @ViewChild('ImagMarker') imgL:ElementRef;
   @ViewChild('mem_heap_BMarker') mem_heap_BL:ElementRef;
 
 
@@ -43,12 +44,20 @@ export class AppComponent   implements OnInit {
    
     // this.initObjUrls();
     
-    let dropbox;
-    dropbox = document.getElementById("dropbox");
-    dropbox.addEventListener("dragenter", this.dragenter, false);
-    dropbox.addEventListener("dragover", this.dragover, false);
+    // let dropbox;
+    // dropbox = document.getElementById("dropbox");
+    document.getElementById("dropbox").addEventListener("dragenter", (e)=> {
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
+    document.getElementById("dropbox").addEventListener("dragover", (e)=> {
+      e.stopPropagation();
+      e.preventDefault();
+    }, false);
     //FIXME: this drop event doesn't work, need to figure out the order of event handling
-    dropbox.addEventListener("drop", this.drop, false);
+    document.getElementById("dropbox").addEventListener("drop",(e)=>
+    {this.drop(e, this);
+    }, false);
 
    }
 
@@ -124,25 +133,43 @@ export class AppComponent   implements OnInit {
 
 
 
-   dragenter(e) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
+  //  dragenter(e) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  // }
   
-   dragover(e) {
-    e.stopPropagation();
-    e.preventDefault();
+  //  dragover(e) {
+  //   e.stopPropagation();
+  //   e.preventDefault();
     
-  }
+  // }
 
-   drop(e) {
+   drop(e, ptr) {
     e.stopPropagation();
     e.preventDefault();
   
     let dt = e.dataTransfer;
+    let data = e.dataTransfer.getData("text");
     let files = dt.files;
   
-    this.handleFiles(files);
+    // this.handleFiles(files);
+
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      
+      if (!file.type.startsWith('image/')){ continue }
+      
+      let img = document.createElement("img");
+      
+      img.classList.add("obj");
+      img.setAttribute("file", file);
+      // preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+      ptr.imgL.nativeElement.appendChild(img);
+      let reader = new FileReader();
+      reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+      reader.readAsDataURL(file);
+    }
+
   }
 
 
@@ -213,10 +240,6 @@ export class AppComponent   implements OnInit {
   handleMassifData(){
     // console.log("inputString:" + this.inputString);
     // alert(this.inputString);
-
-
-
-
     let cmdRegPatt = new RegExp( ".*cmd: (.*)\n");
     let cmdRet = (/.*cmd:\s(.*)\n/g).exec(this.inputString);
     let timeunitRet = (/.*time_unit:\s(.*)\n/g).exec(this.inputString);
@@ -236,7 +259,7 @@ export class AppComponent   implements OnInit {
       node.heap_tree = snapshotMatch[6];
       this.snapshots.push(node);
       // console.log(node);
-}
+    }
     // alert(snaptshotRet[1]);
     // console.log("the left string:" + this.inputString);
 
