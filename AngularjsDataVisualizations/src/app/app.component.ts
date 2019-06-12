@@ -40,12 +40,13 @@ export class AppComponent   implements OnInit {
 
  //code that will execute at the start of the loading process
  // just like body.onload()
+ // it's invoked later that constructor function
   ngOnInit(){
    
     // this.initObjUrls();
     
-    // let dropbox;
-    // dropbox = document.getElementById("dropbox");
+    let dropbox;
+    dropbox = document.getElementById("dropbox");
     document.getElementById("dropbox").addEventListener("dragenter", (e)=> {
       e.stopPropagation();
       e.preventDefault();
@@ -54,12 +55,17 @@ export class AppComponent   implements OnInit {
       e.stopPropagation();
       e.preventDefault();
     }, false);
-    //FIXME: this drop event doesn't work, need to figure out the order of event handling
-    document.getElementById("dropbox").addEventListener("drop",(e)=>
-    {this.drop(e, this);
+    document.getElementById("dropbox").addEventListener("drop", (e)=> {
+      let ptr = this;
+      this.dropHanlder(e, ptr);
     }, false);
-
-   }
+    // //FIXME: this drop event doesn't work, need to figure out the order of event handling
+    // document.getElementById("dropbox").addEventListener("drop", this.drop, false);
+  //   addEventListener specify  The function that is called after the event is triggered.
+  //   useCapture: The third parameter is a Boolean value that describes whether the event is bubbling or trapping. This parameter is optional.
+  // true: The event handler is executed during the capture phase(The capture is handled in the external element event first, and then the internal).
+  // false: Default. The event handler is executed in the bubble stage.   
+}
 
   constructor(){
    
@@ -133,18 +139,18 @@ export class AppComponent   implements OnInit {
 
 
 
-  //  dragenter(e) {
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  // }
+   dragenter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
   
-  //  dragover(e) {
-  //   e.stopPropagation();
-  //   e.preventDefault();
+   dragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
     
-  // }
+  }
 
-   drop(e, ptr) {
+   dropHanlder(e, ptr) {
     e.stopPropagation();
     e.preventDefault();
   
@@ -157,17 +163,30 @@ export class AppComponent   implements OnInit {
     for (let i = 0; i < files.length; i++) {
       let file = files[i];
       
-      if (!file.type.startsWith('image/')){ continue }
+      if (file.type.startsWith('image/')){ 
+        let img = document.createElement("img");
       
-      let img = document.createElement("img");
+        img.classList.add("obj");
+        img.setAttribute("file", file);
+        // preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+        ptr.imgL.nativeElement.appendChild(img);
+        let reader = new FileReader();
+        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+        reader.readAsDataURL(file);
+       }
       
-      img.classList.add("obj");
-      img.setAttribute("file", file);
-      // preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-      ptr.imgL.nativeElement.appendChild(img);
-      let reader = new FileReader();
-      reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-      reader.readAsDataURL(file);
+       if (file.type.startsWith('text/')){ 
+        let txtfile = document.createElement("txtfile");
+      
+        txtfile.classList.add("obj");
+        txtfile.setAttribute("file", file);
+        // preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+        ptr.imgL.nativeElement.appendChild(txtfile);
+        let reader = new FileReader();
+        reader.onload = (function(aText) { return function(e) { aText.textContent = e.target.result; }; })(txtfile);
+        reader.readAsText(file);
+       }
+      // 
     }
 
   }
