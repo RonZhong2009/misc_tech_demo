@@ -1,7 +1,0 @@
-# Netscape HTTP Cookie File
-# http://curl.haxx.se/rfc/cookie_spec.html
-# This is a generated file!  Do not edit.
-
-.github.com	TRUE	/	FALSE	1624198969	_octo	GH1.1.1175417558.1561040569
-.github.com	TRUE	/	TRUE	2192192569	logged_in	no
-github.com	FALSE	/	FALSE	1561044169	has_recent_activity	1
