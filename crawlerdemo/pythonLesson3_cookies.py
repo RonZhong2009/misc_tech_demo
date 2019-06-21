@@ -45,3 +45,21 @@ opener2 = urllib.request.build_opener(handler2)
 opener2.open("https://github.com/RonZhong2009")
 
 cookiejar2.save()
+
+
+#################phase 3################################
+
+#test try except
+requset = urllib.request.Request('https://github.com/RonZhong2009/unexpecterror')
+
+try:
+    urllib.request.urlopen(requset)
+# #except urllib.request.HTTPError, err:, error msg: ", variable" not allowed in 3.x - use "as variable" instead.
+except urllib.request.HTTPError as err:
+    print (err.code)
+
+except urllib.request.URLError as err:
+    print (err)
+
+else:
+    print ("Good Job\n")
