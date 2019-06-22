@@ -62,4 +62,19 @@ except urllib.request.URLError as err:
     print (err)
 
 else:
-    print ("Good Job\n")
+    print ("Well Done\n")
+
+################phase 4#########################################
+
+# user-defined data request
+http_handler = urllib.request.HTTPHandler()
+https_handler = urllib.request.HTTPSHandler()
+
+opener = urllib.request.build_opener(http_handler)
+
+#think about we can use == 
+# urllib.request.Request('https://www.baidu.com')
+# what's the difference b/w those two ways
+response = opener.open('https://www.baidu.com')
+
+print(response.read())
