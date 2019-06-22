@@ -67,7 +67,9 @@ else:
 ################phase 4#########################################
 
 # user-defined data request
-http_handler = urllib.request.HTTPHandler()
+#http_handler = urllib.request..HTTPHandler(debuglevel=1) can open debug mode
+#http_handler = urllib.request.HTTPHandler(), nothing different seems
+http_handler = urllib.request.HTTPHandler(debuglevel=1)
 https_handler = urllib.request.HTTPSHandler()
 
 opener = urllib.request.build_opener(http_handler)
