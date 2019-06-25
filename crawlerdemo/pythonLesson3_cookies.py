@@ -80,3 +80,30 @@ opener = urllib.request.build_opener(http_handler)
 response = opener.open('https://www.baidu.com')
 
 print(response.read())
+
+
+#################phase 5##############################################
+
+ftp_server = '192.168.1.100'
+username = 'root'
+password = '123'
+
+
+#pass_mgr
+pass_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+pass_mgr.add_password(None,ftp_server,username,password)
+
+http_auth_handler = urllib.request.HTTPBasicAuthHandler(pass_mgr)
+
+#
+request =  urllib.request.Request('https://github.com/RonZhong2009')
+
+#
+opener =  urllib.request.build_opener(http_auth_handler)
+
+response = opener.open(request)
+
+# 
+content = response.read()
+
+print(content)
